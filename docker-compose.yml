@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app
+    ports:
+      - "9000:9000"
+    volumes:
+      - .:/var/www
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: shopping_cart
+      POSTGRES_USER: postgres_admin
+      POSTGRES_PASSWORD: postgres_admin
+    ports:
+      - "5432:5432"
