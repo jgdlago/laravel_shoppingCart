@@ -12,6 +12,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('product')->group(function() {
 
-    Route::get('/', [ProductController::class, 'getAllProducts'] )->name('produto.all');
+    Route::get('/', [ProductController::class, 'getAllProducts'] )->name('product.all');
+
+    Route::post('/', [ProductController::class, 'createProduct'] )->name('product.create');
 
 });
