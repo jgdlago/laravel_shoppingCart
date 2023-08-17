@@ -12,7 +12,11 @@ class ProductService extends GenericService {
     }
 
     public function createProduct($data) {
-        return Product::create($data);
+        return $this->create(Product::class, $data);
+    }
+
+    public function updateProduct($data, $id) {
+        return $this->update(Product::class, $data, $id);
     }
 
 }

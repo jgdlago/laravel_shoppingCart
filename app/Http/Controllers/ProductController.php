@@ -34,4 +34,22 @@ class ProductController extends Controller {
         }
     }
 
+    public function updateProduct(ProductFormRequest $request, $id) {
+        $data = $request->all();
+
+        $updatedProduct = $this->productService->updateProduct($data, $id);
+
+        if ($updatedProduct) {
+            return response()->json([
+                'message' => 'Product updated successfully.',
+                'data' => $updatedProduct
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'Failed to update product.'
+            ], 500);
+        }
+
+    }
+
 }
