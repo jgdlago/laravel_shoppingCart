@@ -1,19 +1,57 @@
-version: '3'
+version: "3.7"
+
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: laravel-app
-    ports:
-      - "9000:9000"
-    volumes:
-      - .:/var/www
-  db:
-    image: postgres
-    environment:
-      POSTGRES_DB: shopping_cart
-      POSTGRES_USER: postgres_admin
-      POSTGRES_PASSWORD: postgres_admin
-    ports:
-      - "5432:5432"
+    shopping_cart:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - shopping-cart-network
+    # nginx
+    nginx:
+        container_name: servidor-nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8989:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - shopping-cart-network
+    # db postgres ${DB_DATABASE} //Busca do arquivo .env
+    postgres:
+        container_name: banco-postgres
+        image: postgres:latest
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./docker/postgres/dbdata:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - shopping-cart-network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - postgres
+        restart: always
+        environment:
+            - PMA_ARBITRARY=1
+        ports:
+            - 8899:80
+        networks:
+            - shopping-cart-network
+
+networks:
+    shopping-cart-network:
+        driver: bridge
