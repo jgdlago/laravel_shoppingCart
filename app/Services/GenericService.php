@@ -2,25 +2,32 @@
 
 namespace App\Services;
 
+use Illuminate\Database\Eloquent\Model;
+
 class GenericService {
+    protected $model;
 
-    public function getAll($modelClass) {
-        return $modelClass::all();
+    public function __construct(Model $model) {
+        $this->model = $model;
     }
 
-    public function create($modelClass, $data) { // Adicione $data como argumento
-        return $modelClass::create($data);
+    public function getAll() {
+        return $this->model::all();
     }
 
-    public function update($modelClass, $data, $id) { // Adicione $data e $id como argumentos
-        $findProduct = $modelClass::find($id);
-        return $findProduct->update($data);
+    public function create(array $data) {
+        return $this->model::create($data);
     }
 
-    public function delete($modelClass, $id) {
-        $findProduct = $modelClass::find($id);
-        return $findProduct->delete();
+    public function update(array $data, $id) {
+        $item = $this->model::findOrFail($id);
+        $item->update($data);
+        return $item;
     }
-    
+
+    public function delete($id) {
+        $item = $this->model::findOrFail($id);
+        $item->delete();
+        return $item;
+    }
 }
-
