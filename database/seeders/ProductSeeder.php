@@ -17,10 +17,16 @@ class ProductSeeder extends Seeder {
                 'unit_of_measurement' => '500g',
             ],
             [
-                'name' => 'Café',
-                'description' => 'Café tradicional de intensidade 5',
-                'price' => 16.90,
-                'unit_of_measurement' => '1kg',
+                'name' => 'Monster',
+                'description' => 'Energético sabor manga',
+                'price' => 07.90,
+                'unit_of_measurement' => '477ml',
+            ],
+            [
+                'name' => 'Pizza',
+                'description' => 'Pizza congelada de calabresa',
+                'price' => 18.90,
+                'unit_of_measurement' => '400g',
             ]
         ]);
 

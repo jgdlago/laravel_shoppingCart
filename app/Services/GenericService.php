@@ -16,6 +16,11 @@ class GenericService {
         $findProduct = $modelClass::find($id);
         return $findProduct->update($data);
     }
+
+    public function delete($modelClass, $id) {
+        $findProduct = $modelClass::find($id);
+        return $findProduct->delete();
+    }
     
 }
 

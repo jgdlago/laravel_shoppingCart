@@ -23,7 +23,6 @@ services:
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
             - shopping-cart-network
-    # db postgres ${DB_DATABASE} //Busca do arquivo .env
     postgres:
         container_name: banco-postgres
         image: postgres:latest

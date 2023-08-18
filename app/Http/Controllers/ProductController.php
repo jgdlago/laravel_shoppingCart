@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductFormRequest;
+use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -14,42 +15,49 @@ class ProductController extends Controller {
     }
     
     public function getAllProducts() {
-        return $this->productService->getAllProducts();
+        return $this->productService->getAll(Product::class);
     }
 
     public function createProduct(ProductFormRequest $request) {
         $data = $request->all();
 
-        $createdProduct = $this->productService->createProduct($data);
+        $createdProduct = $this->productService->create(Product::class, $data);
 
-        if ($createdProduct) {
-            return response()->json([
-                'message' => 'Product created successfully.',
-                'data' => $createdProduct
-            ], 201);
-        } else {
-            return response()->json([
-                'message' => 'Failed to create product.'
-            ], 500);
-        }
+        return $this->httpCustomResponse($createdProduct, "Create");
     }
 
     public function updateProduct(ProductFormRequest $request, $id) {
         $data = $request->all();
 
-        $updatedProduct = $this->productService->updateProduct($data, $id);
+        $updatedProduct = $this->productService->update(Product::class, $data, $id);
 
-        if ($updatedProduct) {
+        return $this->httpCustomResponse($updatedProduct, "Update");
+
+    }
+
+    public function deleteProduct($id) {
+        $deletedProduct = $this->productService->delete(Product::class, $id);
+        return $this->httpCustomResponse($deletedProduct, "Delete");
+    }
+
+
+
+
+
+    public function httpCustomResponse($product, $action) {
+
+        if ($product) {
             return response()->json([
-                'message' => 'Product updated successfully.',
-                'data' => $updatedProduct
+                'message' => $action . ' success',
+                'data' => $product
             ], 201);
         } else {
             return response()->json([
-                'message' => 'Failed to update product.'
+                'message' => $action . ' error'
             ], 500);
         }
 
     }
+
 
 }
