@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 
 class CartController extends GenericController {
 
-    protected $cartService;
     public function __construct(CartService $cartService) {
-        $this->cartService = $cartService;
+        parent::__construct($cartService);
     }
 
     public function createCart(Request $request) {

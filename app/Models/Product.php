@@ -14,4 +14,8 @@ class Product extends Model {
         'price',
         'unit_of_measurement'
     ];
+
+    public function cartItems() {
+        return $this->hasMany(CartItem::class);
+    }
 }
