@@ -15,11 +15,11 @@ class GenericService {
         return $this->model::all();
     }
 
-    public function create(array $data) {
+    public function create($data) {
         return $this->model::create($data);
     }
 
-    public function update(array $data, $id) {
+    public function update($data, $id) {
         $item = $this->model::findOrFail($id);
         $item->update($data);
         return $item;

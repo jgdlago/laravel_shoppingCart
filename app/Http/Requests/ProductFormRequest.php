@@ -15,7 +15,8 @@ class ProductFormRequest extends FormRequest {
         if ($this->method() == "POST" || $this->method() == "PUT") {
             $request = [
                 'name' => 'required',
-                'price' => 'required'
+                'price' => 'required',
+                'product_code' => 'required'
             ];
         }
 

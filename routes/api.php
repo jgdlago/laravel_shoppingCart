@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cart_ItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -26,5 +27,14 @@ Route::prefix('cart')->group(function() {
     Route::post('/', [CartController::class, 'createCart'] )->name('cart.create');
     Route::put('/{id}', [CartController::class, 'updateCart'] )->name('cart.update');
     Route::delete('/{id}', [CartController::class, 'deleteCart'] )->name('cart.delete');
+
+});
+
+Route::prefix('cart_item')->group(function() {
+
+    Route::get('/', [Cart_ItemController::class, 'getAll'] )->name('cart_item.all');
+    Route::post('/', [Cart_ItemController::class, 'createCart_Item'] )->name('cart_item.create');
+    Route::put('/{id}', [Cart_ItemController::class, 'updateCart_Item'] )->name('cart_item.update');
+    Route::delete('/{id}', [Cart_ItemController::class, 'deleteCart_Item'] )->name('cart_item.delete');
 
 });
