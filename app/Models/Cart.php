@@ -9,7 +9,7 @@ class Cart extends Model {
     use HasFactory;
 
     protected $fillable = [
-        'total_price'
+        'total_price',
     ];
 
     public function cartItems() {

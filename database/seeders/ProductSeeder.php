@@ -11,25 +11,25 @@ class ProductSeeder extends Seeder {
     public function run(): void {
         Product::insert([
             [
-                'name' => 'Café',
-                'product_code' => 'ABC123',
-                'description' => 'Café tradicional de intensidade 8',
+                'name' => 'Biscoito recheado',
+                'product_code' => 'AL3',
+                'description' => 'Biscoito recheado morango',
                 'price' => 10.99,
-                'unit_of_measurement' => '500g',
+                'unit_of_measurement' => '1 un',
             ],
             [
-                'name' => 'Monster',
-                'product_code' => 'CFS231',
+                'name' => 'Energético',
+                'product_code' => 'BD1',
                 'description' => 'Energético sabor manga',
-                'price' => 07.90,
-                'unit_of_measurement' => '477ml',
+                'price' => 7.99,
+                'unit_of_measurement' => '473ml',
             ],
             [
-                'name' => 'Pizza',
-                'product_code' => 'GS342',
-                'description' => 'Pizza congelada de calabresa',
-                'price' => 18.90,
-                'unit_of_measurement' => '400g',
+                'name' => 'Vinho',
+                'product_code' => 'BD2',
+                'description' => 'Vinho Chileno Reservado Cabernet Sauvignon',
+                'price' => 21.90,
+                'unit_of_measurement' => '750ml',
             ]
         ]);
 

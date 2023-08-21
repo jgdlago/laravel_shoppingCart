@@ -17,22 +17,19 @@ class GenericController extends Controller {
         return $this->service->getAll();
     }
 
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         $data = $request->all();
         $createdItem = $this->service->create($data);
         return $this->httpCustomResponse($createdItem, "Create");
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $data = $request->all();
         $updatedItem = $this->service->update($data, $id);
         return $this->httpCustomResponse($updatedItem, "Update");
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $deletedItem = $this->service->delete($id);
         return $this->httpCustomResponse($deletedItem, "Delete");
     }
