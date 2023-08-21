@@ -11,4 +11,18 @@ class CartService extends GenericService {
         parent::__construct($cartModel);
     }
 
+    public function updateTotalPrice(Cart $cart) {
+        $cartItems = $cart->cartItems;
+        $totalPrice = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $totalPrice += $cartItem->subtotal;
+        }
+
+        $cart->total_price = $totalPrice;
+        $cart->save();
+
+        return $cart;
+    }
+
 }

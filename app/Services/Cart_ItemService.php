@@ -11,19 +11,34 @@ class Cart_ItemService extends GenericService {
 
     protected $promotion;
     protected $product;
-
-    public function __construct(Cart_items $cart_items, Promotion $promotion, Product $product) {
+    protected $cartService;
+    public function __construct(Cart_items $cart_items, Promotion $promotion, Product $product, CartService $cartService) {
         parent::__construct($cart_items);
         $this->promotion = $promotion;
         $this->product = $product;
+        $this->cartService = $cartService; 
     }
 
     public function create($data) {
         $cart_item = $data->all();
-    
         $cart_item = $this->applySubtotal($cart_item);
         
-        return parent::create($cart_item);
+        $createdCartItem = parent::create($cart_item);
+
+        $this->cartService->updateTotalPrice($createdCartItem->cart);
+        
+        return $createdCartItem;
+    }
+
+    public function update($id, $data) {
+        $cart_item = $data->all();
+        $cart_item = $this->applySubtotal($cart_item);
+
+        $updatedCartItem = parent::update($id, $cart_item);
+
+        $this->cartService->updateTotalPrice($updatedCartItem->cart);
+
+        return $updatedCartItem;
     }
     
     public function applySubtotal($cart_item) {
