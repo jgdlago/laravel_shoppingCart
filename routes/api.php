@@ -3,6 +3,7 @@
 use App\Http\Controllers\Cart_ItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,14 @@ Route::prefix('cart_item')->group(function() {
     Route::post('/', [Cart_ItemController::class, 'createCart_Item'] )->name('cart_item.create');
     Route::put('/{id}', [Cart_ItemController::class, 'updateCart_Item'] )->name('cart_item.update');
     Route::delete('/{id}', [Cart_ItemController::class, 'deleteCart_Item'] )->name('cart_item.delete');
+
+});
+
+Route::prefix('promotion')->group(function() {
+
+    Route::get('/', [PromotionController::class, 'getAll'] )->name('promotion.all');
+    Route::post('/', [PromotionController::class, 'createPromotion'] )->name('promotion.create');
+    Route::put('/{id}', [PromotionController::class, 'updatePromotion'] )->name('promotion.update');
+    Route::delete('/{id}', [PromotionController::class, 'deletePromotion'] )->name('promotion.delete');
 
 });

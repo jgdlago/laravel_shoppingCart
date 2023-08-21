@@ -19,11 +19,11 @@ class GenericService {
         return $this->model::create($data);
     }
 
-    public function update($data, $id) {
+    public function update($id, $data) {
         $item = $this->model::findOrFail($id);
         $item->update($data);
         return $item;
-    }
+    }    
 
     public function delete($id) {
         $item = $this->model::findOrFail($id);

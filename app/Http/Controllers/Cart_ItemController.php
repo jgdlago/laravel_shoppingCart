@@ -18,7 +18,7 @@ class Cart_ItemController extends GenericController {
     }
 
     public function updateCart_Item(Request $request, $id) {
-        return parent::update($request, $id);
+        return $this->cart_ItemService->update($request, $id);
     }
 
     public function deleteCart_Item($id) {
