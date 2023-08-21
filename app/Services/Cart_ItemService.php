@@ -3,20 +3,23 @@
 namespace App\Services;
 
 use App\Models\Cart_items;
+use App\Models\Product;
 use App\Models\Promotion;
 use App\Services\GenericService;
 
 class Cart_ItemService extends GenericService {
 
     protected $promotion;
+    protected $product;
 
-    public function __construct(Cart_items $cart_items, Promotion $promotion) {
+    public function __construct(Cart_items $cart_items, Promotion $promotion, Product $product) {
         parent::__construct($cart_items);
         $this->promotion = $promotion;
+        $this->product = $product;
     }
 
     public function create($data) {
-        $cart_item = $data;
+        $cart_item = $data->all();
     
         $cart_item = $this->applySubtotal($cart_item);
         
@@ -24,17 +27,17 @@ class Cart_ItemService extends GenericService {
     }
     
     public function applySubtotal($cart_item) {
-        $product = $cart_item['product'];
+        $product_cart = Product::find($cart_item['product_id']);
         $promotionalProductCodes = $this->promotion->getPromotionalProductCodes();
     
-        if (in_array($product['product_code'], $promotionalProductCodes)) {
-            $promotionRules = $this->promotion->getPromotionRules($product['product_code']);
+        if (in_array($product_cart['product_code'], $promotionalProductCodes)) {
+            $promotionRules = $this->promotion->getPromotionRules($product_cart['product_code']);
             $subtotal = 0;
     
             switch ($promotionRules['promotion_type']) {
                 case 'buy_1_get_1':
                     if ($cart_item['quantity'] >= $promotionRules['rules']['min_quantity']) {
-                        $subtotal = $product['price'] * ceil($cart_item['quantity'] / 2);
+                        $subtotal = $product_cart['price'] * ceil($cart_item['quantity'] / 2);
                     }
                     break;
     
@@ -47,7 +50,7 @@ class Cart_ItemService extends GenericService {
                 case 'buy_3_get_1':
                     if ($cart_item['quantity'] >= $promotionRules['rules']['min_quantity'] && !array_key_exists('promotion_price', $promotionRules['rules'])) {
                         $freeBottles = floor($cart_item['quantity'] / $promotionRules['rules']['min_quantity']);
-                        $subtotal = ($cart_item['quantity'] - $freeBottles) * $product['price'];
+                        $subtotal = ($cart_item['quantity'] - $freeBottles) * $product_cart['price'];
                     }
                     if ($cart_item['quantity'] >= $promotionRules['rules']['min_quantity'] && array_key_exists('promotion_price', $promotionRules['rules'])) {
                         $subtotal = $promotionRules['rules']['promotion_price'] * ceil($cart_item['quantity']);
@@ -56,14 +59,15 @@ class Cart_ItemService extends GenericService {
     
                 case 'buy_4_get_1':
                     if ($cart_item['quantity'] >= $promotionRules['rules']['min_quantity']) {
-                        $promotionPrice = $product['price'] * 0.9;
+                        $promotionPrice = $product_cart['price'] * 0.9;
                         $subtotal = $cart_item['quantity'] * $promotionPrice;
                     }
                     break;
             }
-    
-            $cart_item['subtotal'] = $subtotal;
+        } else {
+            $cart_item['subtotal'] = $cart_item['quantity'] * $product_cart['price'];
         }
+
     
         return $cart_item;
     }

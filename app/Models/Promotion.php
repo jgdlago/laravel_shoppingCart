@@ -13,12 +13,12 @@ class Promotion extends Model {
         'rules'
     ];
 
-    protected function getPromotionalProductCodes() {
+    public function getPromotionalProductCodes() {
         $promotionalProducts = Promotion::pluck('product_code')->toArray();
         return $promotionalProducts;
     }
 
-    protected function getPromotionRules($productCode) {
+    public function getPromotionRules($productCode) {
         $promotion = Promotion::where('product_code', $productCode)->first();
         
         if ($promotion) {
