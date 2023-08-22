@@ -14,7 +14,27 @@ class GenericController extends Controller {
     }
 
     public function getAll() {
-        return $this->service->getAll();
+        try {
+            return $this->service->getAll();
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'search failed'
+            ], 500);
+        }
+    }
+
+    public function findById($id) {
+        try {
+            $findItem = $this->service->findById($id);
+            return response()->json([
+                'message' => 'Find success',
+                'data' => $findItem
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'search failed'
+            ], 500);
+        }
     }
 
     public function create(Request $request) {

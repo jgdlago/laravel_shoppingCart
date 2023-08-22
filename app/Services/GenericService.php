@@ -30,4 +30,8 @@ class GenericService {
         $item->delete();
         return $item;
     }
+
+    public function findById($id) {
+        return $this->model::findOrFail($id);
+    }
 }
