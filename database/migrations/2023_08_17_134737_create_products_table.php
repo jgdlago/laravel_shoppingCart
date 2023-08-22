@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->required();
-            $table->string('product_code')->required();
+            $table->string('product_code')->unique()->required();
             $table->text('description');
             $table->decimal('price', 10, 2)->required();
             $table->string('unit_of_measurement');

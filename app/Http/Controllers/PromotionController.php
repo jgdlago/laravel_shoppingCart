@@ -14,25 +14,54 @@ class PromotionController extends GenericController {
     }
 
     public function createPromotion(PromotionFormRequest $request) {
-        $data = [
-            'product_code' => $request->input('product_code'),
-            'rules' => $request->input('rules'),
-        ];
+        try {
+            $data = [
+                'product_code' => $request->input('product_code'),
+                'rules' => $request->input('rules'),
+            ];
 
-        return $this->promotionService->create($data);
+            $createdItem = $this->promotionService->create($data);
+            return response()->json([
+                'message' => 'Created success',
+                'data' => $createdItem
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to create promotion'
+            ], 500);
+        }
     }
 
     public function updatePromotion(PromotionFormRequest $request, $id) {
-        $data = [
-            'product_code' => $request->input('product_code'),
-            'rules' => $request->input('rules'),
-        ];
-    
-        return $this->promotionService->update($id, $data);
+        try {
+            $data = [
+                'product_code' => $request->input('product_code'),
+                'rules' => $request->input('rules'),
+            ];
+        
+            $updatedItem = $this->promotionService->update($id, $data);
+            return response()->json([
+                'message' => 'Updated success',
+                'data' => $updatedItem
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to update promotion'
+            ], 500);
+        }
     }
-    
 
     public function deletePromotion($id) {
-        return parent::delete($id);
+        try {
+            $deletedItem = parent::delete($id);
+            return response()->json([
+                'message' => 'Deleted success',
+                'data' => $deletedItem
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to delete promotion'
+            ], 500);
+        }
     }
 }

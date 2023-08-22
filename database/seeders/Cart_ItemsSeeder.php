@@ -12,12 +12,12 @@ class Cart_ItemsSeeder extends Seeder {
         Cart_items::insert([
             [
                 'cart_id' => 1,
-                'product_id' => 14,
+                'product_id' => 1,
                 'quantity' => 4
             ],
             [
                 'cart_id' => 1,
-                'product_id' => 15,
+                'product_id' => 2,
                 'quantity' => 6
             ]
         ]);

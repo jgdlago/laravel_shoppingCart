@@ -23,5 +23,4 @@ class PromotionService extends GenericService {
         return parent::update($id, $data);
     }
        
-
 }
