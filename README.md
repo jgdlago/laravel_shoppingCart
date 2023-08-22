@@ -18,3 +18,9 @@ Documentation:
 localhost:8989/api/doc
 
 storage/api-docs/api-docs.json
+
+Database:
+
+php artisan migrate
+
+php artisan db:seed
