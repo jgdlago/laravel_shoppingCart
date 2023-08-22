@@ -1,21 +1,738 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Shopping cart laravel API",
-        "description": "Controller responsible for Product CRUD methods",
-        "version": "1.0.0"
+        "title": "Shopping Cart",
+        "version": "0.0.1"
     },
+    "servers": [
+        {
+            "url": "http://localhost/api"
+        }
+    ],
     "paths": {
-        "/api/products": {
+        "/api/carts": {
+            "post": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Create a new cart",
+                "operationId": "b5e65bb90b5ff6c7f38b3417c6570289",
+                "requestBody": {
+                    "description": "Cart data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "total_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cart created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "cart created successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to create cart"
+                    }
+                }
+            }
+        },
+        "/api/cart": {
+            "put": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Update a product",
+                "operationId": "ddd8c5fe65a398fdb2cbd0dff83a4ea5",
+                "requestBody": {
+                    "description": "Cart data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "total_price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cart updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cart updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to update cart"
+                    }
+                }
+            }
+        },
+        "/api/carts/{id}": {
+            "delete": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Delete a cart",
+                "operationId": "a23b2ec2c218b0cd9ab0114a2f818f17",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the product to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Cart deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted success"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to delete cart"
+                    }
+                }
+            }
+        },
+        "/api/cart_item": {
+            "put": {
+                "tags": [
+                    "Cart_item"
+                ],
+                "summary": "Create a new cart_item",
+                "operationId": "6609c7258e1c0e0c1f9b5dc026ddbad0",
+                "requestBody": {
+                    "description": "Cart_item data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "cart_item_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "cart_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cart item updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to update cart item"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cart_item"
+                ],
+                "summary": "Create a new cart_item",
+                "operationId": "c0822010920321fa1e2986e2fa384e79",
+                "requestBody": {
+                    "description": "Cart_item data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "cart_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "product_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cart item created successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to create cart item"
+                    }
+                }
+            }
+        },
+        "/api/cart_item/{id}": {
+            "delete": {
+                "tags": [
+                    "Cart_item"
+                ],
+                "summary": "Delete a cart item",
+                "operationId": "0d0a03ac4d7e017d9a162e9dd1584220",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the cart item to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Cart item deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted success"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to delete cart item"
+                    }
+                }
+            }
+        },
+        "/api/{resource}": {
             "get": {
+                "tags": [
+                    "Generic"
+                ],
+                "summary": "Get all items",
+                "operationId": "93f23b59ce9bbba040831d5e426bf51e",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    },
+                    "500": {
+                        "description": "Search failed"
+                    }
+                }
+            }
+        },
+        "/api/{resource}/{id}": {
+            "get": {
+                "tags": [
+                    "Generic"
+                ],
+                "summary": "Find item by ID",
+                "operationId": "13bcd6e32ca6af7549691ceca25f1056",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the item to find",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Search failed"
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "put": {
                 "tags": [
                     "Products"
                 ],
-                "summary": "Get a list of products",
-                "operationId": "9e289d6b0d7637b34630d235f1cea155",
+                "summary": "Update a product",
+                "operationId": "19e9fc4bacd37eb1a3c54f0462345943",
+                "requestBody": {
+                    "description": "Product data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Product Name"
+                                    },
+                                    "product_code": {
+                                        "type": "string",
+                                        "example": "ABC123"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Product description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10.99
+                                    },
+                                    "unit_of_measurement": {
+                                        "type": "string",
+                                        "example": "500g"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
-                    "200": {
-                        "description": "Successful operation"
+                    "201": {
+                        "description": "Product updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to update product"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create a new product",
+                "operationId": "f79470c2afbdb583882235160180a63d",
+                "requestBody": {
+                    "description": "Product data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Product Name"
+                                    },
+                                    "product_code": {
+                                        "type": "string",
+                                        "example": "ABC123"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Product description"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10.99
+                                    },
+                                    "unit_of_measurement": {
+                                        "type": "string",
+                                        "example": "500g"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product created successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to create product"
+                    }
+                }
+            }
+        },
+        "/api/products/{id}": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a product",
+                "operationId": "0fc020dce677361974d68193a62f9b18",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the product to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Product deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted success"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to delete product"
+                    }
+                }
+            }
+        },
+        "/api/promotions": {
+            "put": {
+                "tags": [
+                    "Promotion"
+                ],
+                "summary": "Update a new promotion",
+                "operationId": "91d9b6a5414516de05a6557fba5c3d6a",
+                "requestBody": {
+                    "description": "Promotion data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "product_code": {
+                                        "type": "string",
+                                        "example": "ABC123"
+                                    },
+                                    "rules": {
+                                        "type": "string",
+                                        "example": "promotion_type:buy_1_get_1 rules:min_quantity:1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Promotion updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Promotion updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to create Promotion"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Promotion"
+                ],
+                "summary": "Create a new promotion",
+                "operationId": "581f96a26fd7d2b40f30c156dd48699e",
+                "requestBody": {
+                    "description": "Promotion data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "product_code": {
+                                        "type": "string",
+                                        "example": "ABC123"
+                                    },
+                                    "rules": {
+                                        "type": "string",
+                                        "example": "promotion_type:buy_1_get_1 rules:min_quantity:1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Promotion created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Promotion created successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Failed to create Promotion"
+                    }
+                }
+            }
+        },
+        "/api/promotions/{id}": {
+            "delete": {
+                "tags": [
+                    "Promotion"
+                ],
+                "summary": "Delete a promotion",
+                "operationId": "7760da6086d26d538f8c71ce975b9f83",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the promotion to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Promotion deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deleted success"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to delete Promotion"
                     }
                 }
             }

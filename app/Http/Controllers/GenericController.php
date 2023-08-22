@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Services\GenericService;
 use Illuminate\Routing\Controller;
 
+/**
+ * @OA\Server(url="http://localhost/api"),
+ * @OA\Info(title="Shopping Cart", version="0.0.1")
+ */
 class GenericController extends Controller {
     protected $service;
 
@@ -13,6 +17,18 @@ class GenericController extends Controller {
         $this->service = $service;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/{resource}",
+     *     summary="Get all items",
+     *     tags={"Generic"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response"
+     *     ),
+     *     @OA\Response(response=500, description="Search failed")
+     * )
+     */
     public function getAll() {
         try {
             return $this->service->getAll();
@@ -22,7 +38,30 @@ class GenericController extends Controller {
             ], 500);
         }
     }
-
+    
+    /**
+     * @OA\Get(
+     *     path="/api/{resource}/{id}",
+     *     summary="Find item by ID",
+     *     tags={"Generic"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the item to find",
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(type="object")
+     *     ),
+     *     @OA\Response(response=500, description="Search failed")
+     * )
+     */
     public function findById($id) {
         try {
             $findItem = $this->service->findById($id);

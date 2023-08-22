@@ -1008,9 +1008,9 @@
             'dev_requirement' => true,
         ),
         'swagger-api/swagger-ui' => array(
-            'pretty_version' => 'v5.4.1',
-            'version' => '5.4.1.0',
-            'reference' => '303737538d7014260f77796c92847c605223aabe',
+            'pretty_version' => 'v5.4.2',
+            'version' => '5.4.2.0',
+            'reference' => 'ded8d637ad6321abb41bfb68d110aa8012f6fa2b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../swagger-api/swagger-ui',
             'aliases' => array(),

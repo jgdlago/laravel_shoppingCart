@@ -5840,20 +5840,20 @@
         },
         {
             "name": "swagger-api/swagger-ui",
-            "version": "v5.4.1",
-            "version_normalized": "5.4.1.0",
+            "version": "v5.4.2",
+            "version_normalized": "5.4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swagger-api/swagger-ui.git",
-                "reference": "303737538d7014260f77796c92847c605223aabe"
+                "reference": "ded8d637ad6321abb41bfb68d110aa8012f6fa2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/303737538d7014260f77796c92847c605223aabe",
-                "reference": "303737538d7014260f77796c92847c605223aabe",
+                "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/ded8d637ad6321abb41bfb68d110aa8012f6fa2b",
+                "reference": "ded8d637ad6321abb41bfb68d110aa8012f6fa2b",
                 "shasum": ""
             },
-            "time": "2023-08-17T13:15:08+00:00",
+            "time": "2023-08-17T19:09:58+00:00",
             "type": "library",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -5898,7 +5898,7 @@
             ],
             "support": {
                 "issues": "https://github.com/swagger-api/swagger-ui/issues",
-                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.4.1"
+                "source": "https://github.com/swagger-api/swagger-ui/tree/v5.4.2"
             },
             "install-path": "../swagger-api/swagger-ui"
         },
