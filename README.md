@@ -13,3 +13,8 @@ php artisan key:generate
 
 [http://localhost:8989](http://localhost:8989)
 
+Documentation: 
+
+localhost:8989/api/doc
+
+storage/api-docs/api-docs.json
