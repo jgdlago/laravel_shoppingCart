@@ -30,11 +30,30 @@ class PromotionSeeder extends Seeder {
                 ]),
             ],
             [
+                'product_code' => 'AL5',
+                'rules' => json_encode([
+                    'promotion_type' => 'min_amount',
+                    'rules' => [
+                        'min_quantity' => 3,
+                        'promotion_price' => 3.00,
+                    ]
+                ]),
+            ],
+            [
                 'product_code' => 'BD2',
                 'rules' => json_encode([
                     'promotion_type' => 'buy_3_get_1',
                     'rules' => [
                         'min_quantity' => 3
+                    ]
+                ]),
+            ],
+            [
+                'product_code' => 'BD3',
+                'rules' => json_encode([
+                    'promotion_type' => 'buy_4_get_1',
+                    'rules' => [
+                        'min_quantity' => 4
                     ]
                 ]),
             ]
